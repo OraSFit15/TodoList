@@ -77,18 +77,23 @@ TodoList/
    npm install
    ```
 
-### Installing the Application
+### Building and Installing the Application
 
 #### macOS
 
-1. Download the latest release:
-   - `Todo List-1.0.0-arm64.dmg` for Apple Silicon Macs
+1. Clone and set up the project (see Installation section above)
 
-2. Open the downloaded DMG file
+2. Build the packaged application:
+   ```bash
+   ./build-fixed.sh
+   ```
 
-3. Drag the Todo List app to your Applications folder
+3. The application will be created in `release/mac-arm64/Todo List.app`
 
-4. Launch Todo List from your Applications folder or Spotlight
+4. You can then:
+   - Run it directly: `open "release/mac-arm64/Todo List.app"`
+   - Copy it to your Applications folder for permanent installation
+   - Distribute the .app file to other macOS users
 
 Note: When opening the app for the first time, you may need to right-click the app and select "Open" to bypass macOS security.
 
