@@ -49,6 +49,6 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist/renderer'),
-    publicPath: '/',
+    publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   },
 };

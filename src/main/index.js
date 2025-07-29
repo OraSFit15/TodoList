@@ -1,36 +1,7 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
+// This is just a loader for the TypeScript compiled code
+// Make sure NODE_ENV is set for development mode
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-function createWindow() {
-  const mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 800,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      webSecurity: false
-    }
-  });
+// Just require the compiled TypeScript file
+require('../../dist/main/main');
 
-  // En développement, on charge l'URL de webpack-dev-server
-  mainWindow.loadURL('http://localhost:4000');
-
-  // Ouvre les outils de développement
-  mainWindow.webContents.openDevTools();
-}
-
-app.whenReady().then(() => {
-  createWindow();
-
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
-});
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});

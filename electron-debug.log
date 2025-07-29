@@ -1,0 +1,2 @@
+Démarrage du débogage à Wed Jul 30 01:14:26 IDT 2025
+electron: [DEP0062]: `node --debug` and `node --debug-brk` are invalid. Please use `node --inspect` and `node --inspect-brk` instead.
