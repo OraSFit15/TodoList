@@ -96,6 +96,11 @@ Note: When opening the app for the first time, you may need to right-click the a
 
 Start the development server with hot reload:
 ```bash
+./run-dev.sh
+```
+
+Or manually:
+```bash
 npm run dev
 ```
 
@@ -127,14 +132,27 @@ If you encounter issues with Electron not connecting to the webpack dev server:
 
 ## Building
 
-Build the application:
+### Development Build
+Build the application for development:
 ```bash
 npm run build
 ```
 
 This creates:
 - Compiled TypeScript for the main process in `dist/main/`
-- Bundled React application in `dist/`
+- Bundled React application in `dist/renderer/`
+
+### Production Build (Packaged Application)
+Create a packaged .app for macOS:
+```bash
+./build-fixed.sh
+```
+
+This will:
+- Build the application
+- Create a packaged macOS application in `release/mac-arm64/Todo List.app`
+- Handle dependency resolution issues automatically
+- Generate a distributable .app file
 
 ## Testing
 
@@ -216,17 +234,25 @@ If Electron fails to connect to the webpack dev server:
 3. Try the separate terminal approach described in the Development section
 4. Make sure NODE_ENV is set to "development"
 
-### Building for Production
+### Running the Application
 
-There is currently an issue with the build process for production packages related to dependency resolution for `@date-io/date-fns`. To use the application:
-
-#### Development Mode (recommended)
+#### Development Mode (recommended for development)
 
 ```bash
-NODE_ENV=development npm run dev
+./run-dev.sh
 ```
 
-#### Production Mode
+#### Production Mode (packaged application)
+
+After building with `./build-fixed.sh`, launch the packaged application:
+
+```bash
+open "release/mac-arm64/Todo List.app"
+```
+
+Or simply double-click the `Todo List.app` file in Finder.
+
+#### Manual Production Mode
 
 If you want to test the production build without packaging:
 
@@ -240,10 +266,6 @@ sed -i '' 's|src="/renderer.js"|src="./renderer.js"|g' dist/renderer/index.html
 # Run in production mode
 NODE_ENV=production npx electron .
 ```
-
-#### Pre-built Releases
-
-Pre-built versions are available in the `release` folder but may not contain the latest fixes.
 
 ## Future Improvements
 
