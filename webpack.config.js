@@ -4,11 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
     port: 4000,
     hot: true,
+    open: false,
     historyApiFallback: true,
     devMiddleware: {
       publicPath: '/',
@@ -43,16 +41,14 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/renderer/index.html',
-      filename: 'index.html'
+      filename: 'index.html',
+      publicPath: '/',
+      inject: true
     })
   ],
   output: {
-    filename: 'renderer.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist/renderer'),
+    publicPath: '/',
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src/renderer/index.html')
-    })
-  ],
 };

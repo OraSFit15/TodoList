@@ -1,8 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 
-function createWindow() {
-  // Create the browser window.
+async function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -12,29 +11,27 @@ function createWindow() {
     }
   });
 
-  // Load the app
-  const isDev = process.env.NODE_ENV === 'development';
-  if (isDev) {
-    mainWindow.loadURL('http://localhost:4000');
-  } else {
-    mainWindow.loadFile(path.join(__dirname, '..', 'index.html'));
-  }
+  // Wait a bit for dev server to be ready, then load
+  setTimeout(async () => {
+    try {
+      await mainWindow.loadURL('http://localhost:4000');
+      mainWindow.webContents.openDevTools();
+    } catch (error) {
+      console.error('Failed to load dev server:', error);
+    }
+  }, 2000);
 }
 
-// This method will be called when Electron has finished initialization
-app.whenReady().then(() => {
-  createWindow();
+app.whenReady().then(createWindow);
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
-});
-
-// Quit when all windows are closed.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
+  }
+});
+
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
   }
 });

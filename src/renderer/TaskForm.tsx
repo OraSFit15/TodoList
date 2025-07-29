@@ -1,20 +1,30 @@
-import React, { useState } from 'react';
-import { Todo, TaskType, Priority } from './types';
-import { TextField, Select, MenuItem, Button, FormControl, InputLabel, Box } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { enUS } from 'date-fns/locale';
+import React, { useState } from "react";
+import { Todo, TaskType, Priority } from "./types";
+import {
+  TextField,
+  Select,
+  MenuItem,
+  Button,
+  FormControl,
+  InputLabel,
+  Box,
+} from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { enUS } from "date-fns/locale";
 
 interface TaskFormProps {
-  onSubmit: (todo: Omit<Todo, 'id' | 'completed' | 'createdAt' | 'completedAt'>) => void;
+  onSubmit: (
+    todo: Omit<Todo, "id" | "completed" | "createdAt" | "completedAt">
+  ) => void;
 }
 
 export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
-  const [text, setText] = useState('');
-  const [type, setType] = useState<TaskType>('home');
+  const [text, setText] = useState("");
+  const [type, setType] = useState<TaskType>("Home");
   const [dueDate, setDueDate] = useState<Date | null>(null);
-  const [priority, setPriority] = useState<Priority>('medium');
+  const [priority, setPriority] = useState<Priority>("Medium");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,14 +33,14 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
     onSubmit({
       text,
       type,
-      dueDate: dueDate.toISOString().split('T')[0],
-      priority
+      dueDate: dueDate.toISOString().split("T")[0],
+      priority,
     });
 
-    setText('');
-    setType('home');
+    setText("");
+    setType("Home");
     setDueDate(null);
-    setPriority('medium');
+    setPriority("Medium");
   };
 
   return (
@@ -38,14 +48,14 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
       component="form"
       onSubmit={handleSubmit}
       sx={{
-        display: 'grid',
-        gridTemplateColumns: '2fr 1fr 1fr 1fr auto',
+        display: "grid",
+        gridTemplateColumns: "2fr 1fr 1fr 1fr auto",
         gap: 2,
         p: 2,
-        bgcolor: 'background.paper',
+        bgcolor: "background.paper",
         borderRadius: 1,
         boxShadow: 1,
-        '& .MuiFormControl-root': { minWidth: 120 }
+        "& .MuiFormControl-root": { minWidth: 120 },
       }}
     >
       <TextField
@@ -64,9 +74,9 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
           onChange={(e) => setType(e.target.value as TaskType)}
           label="Type"
         >
-          <MenuItem value="home">Home</MenuItem>
-          <MenuItem value="kids">Kids</MenuItem>
-          <MenuItem value="work">Work</MenuItem>
+          <MenuItem value="Home">Home</MenuItem>
+          <MenuItem value="Kids">Kids</MenuItem>
+          <MenuItem value="Work">Work</MenuItem>
         </Select>
       </FormControl>
 
@@ -77,9 +87,9 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
           onChange={(newValue) => setDueDate(newValue)}
           slotProps={{
             textField: {
-              size: 'small',
-              required: true
-            }
+              size: "small",
+              required: true,
+            },
           }}
         />
       </LocalizationProvider>
@@ -91,9 +101,9 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
           onChange={(e) => setPriority(e.target.value as Priority)}
           label="Priority"
         >
-          <MenuItem value="high">High</MenuItem>
-          <MenuItem value="medium">Medium</MenuItem>
-          <MenuItem value="low">Low</MenuItem>
+          <MenuItem value="High">High</MenuItem>
+          <MenuItem value="Medium">Medium</MenuItem>
+          <MenuItem value="Low">Low</MenuItem>
         </Select>
       </FormControl>
 
@@ -101,9 +111,9 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
         type="submit"
         variant="contained"
         color="primary"
-        sx={{ height: '40px' }}
+        sx={{ height: "40px" }}
       >
-        Ajouter
+        Add
       </Button>
     </Box>
   );

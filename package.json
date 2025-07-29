@@ -8,16 +8,14 @@
     "build:main": "tsc -p tsconfig.main.json",
     "build:renderer": "webpack --mode production",
     "build": "npm run build:main && npm run build:renderer",
-    "dev:renderer": "webpack serve --mode development",
-    "dev": "cross-env NODE_ENV=development concurrently \"npm run dev:renderer\" \"npm run build:main && electron .\"",
+    "dev:renderer": "webpack serve --mode development --port 4000",
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run dev:renderer\" \"sleep 5 && npm run build:main && npx electron .\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "docs": "typedoc",
     "pack": "npm run build && electron-builder --dir",
     "dist": "npm run build && electron-builder"
   },
-  "author": "",
-  "license": "ISC",
   "build": {
     "appId": "com.todolist.app",
     "productName": "Todo List",
@@ -31,6 +29,17 @@
     "mac": {
       "category": "public.app-category.productivity"
     }
+  },
+  "dependencies": {
+    "@date-io/date-fns": "^2.16.0",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.12.0",
+    "@mui/x-date-pickers": "^6.1.0",
+    "date-fns": "^2.29.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.4",
@@ -48,27 +57,15 @@
     "html-webpack-plugin": "^5.5.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.0.5",
-    "jest-environment-jsdom": "^30.0.5",
-    "style-loader": "^4.0.0",
-    "ts-jest": "^29.4.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "style-loader": "^3.3.2",
+    "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.2",
-    "typedoc": "^0.28.7",
-    "typedoc-plugin-markdown": "^4.7.1",
-    "typescript": "^5.0.4",
-    "webpack": "^5.80.0",
-    "webpack-cli": "^5.0.2",
-    "webpack-dev-server": "^5.2.2"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.2.0",
-    "@mui/material": "^7.2.0",
-    "@mui/x-date-pickers": "^8.9.0",
-    "@types/react-calendar": "^3.9.0",
-    "date-fns": "^4.1.0",
-    "react": "^18.2.0",
-    "react-calendar": "^6.0.0",
-    "react-dom": "^18.2.0"
+    "typedoc": "^0.24.6",
+    "typedoc-plugin-markdown": "^3.15.2",
+    "typescript": "^5.0.3",
+    "webpack": "^5.77.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.2"
   }
 }

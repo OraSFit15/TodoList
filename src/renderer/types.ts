@@ -1,11 +1,11 @@
-export type TaskType = 'home' | 'work' | 'kids';
+export type TaskType = "Home" | "Work" | "Kids";
 
-export type Priority = 'high' | 'medium' | 'low';
+export type Priority = "High" | "Medium" | "Low";
 
 export const taskColors: Record<TaskType, string> = {
-  home: '#FFB5BA',    // Pastel Pink
-  work: '#B5E6FF',    // Pastel Blue
-  kids: '#FFE5B5'     // Pastel Orange
+  Home: "#FFB5BA", // Pastel Pink
+  Work: "#B5E6FF", // Pastel Blue
+  Kids: "#FFE5B5", // Pastel Orange
 };
 
 export interface Todo {
